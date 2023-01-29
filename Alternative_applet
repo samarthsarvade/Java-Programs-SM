@@ -1,0 +1,62 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class MySwingApp extends JFrame implements ActionListener {
+    private JTextField n = new JTextField(10);
+    private ButtonGroup g = new ButtonGroup();
+    private JRadioButton m = new JRadioButton("Male", true);
+    private JRadioButton f = new JRadioButton("Female", false);
+    private JComboBox<String> c = new JComboBox<>();
+    private JLabel l1 = new JLabel("Enter Name: ");
+    private JLabel l2 = new JLabel("Select Gender: ");
+    private JLabel l3 = new JLabel("Age: ");
+    private JButton b1 = new JButton("Submit");
+    private String name = "", gender = "";
+    private int age;
+
+    public MySwingApp() {
+        super("My Swing App");
+        setLayout(new FlowLayout());
+
+        g.add(m);
+        g.add(f);
+        add(l1);
+        add(n);
+        add(l2);
+        add(m);
+        add(f);
+        add(l3);
+        c.addItem("18");
+        c.addItem("19");
+        c.addItem("20");
+        c.addItem("21");
+        add(c);
+        add(b1);
+        b1.addActionListener(this);
+
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        name = n.getText();
+        gender = g.getSelection().getActionCommand();
+        age = Integer.parseInt((String) c.getSelectedItem());
+        repaint();
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.drawString("Name: " + name, 20, 100);
+        g.drawString("Gender: " + gender, 20, 120);
+        g.drawString("Age: " + age, 20, 140);
+    }
+
+    public static void main(String[] args) {
+        new MySwingApp();
+    }
+}
